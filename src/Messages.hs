@@ -1,6 +1,6 @@
 module Messages
     ( 
-        Message,
+        Message (..),
         test_message_class
     ) where
 

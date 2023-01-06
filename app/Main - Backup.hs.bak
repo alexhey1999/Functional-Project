@@ -1,0 +1,114 @@
+module Main (main) where
+
+import Control.Parallel.Strategies
+import Users
+import Messages
+import System.IO
+import System.Random
+
+
+create_user :: Int -> String -> User
+create_user id_parse username_parse = User {user_id = id_parse, username = username_parse}
+
+
+create_message :: Int -> String -> String -> User -> User -> Message
+create_message message_id_parse message_content_parse time_created_parse user_sent_to_parse user_sent_from_parse = Message {message_id = message_id_parse, message_content = message_content_parse, time_created = time_created_parse, user_sent_to = user_sent_to_parse, user_sent_from = user_sent_from_parse}
+
+user_list :: [User]
+user_list = [
+        create_user 1 "Person 1",
+        create_user 2 "Person 2",
+        create_user 3 "Person 3",
+        create_user 4 "Person 4",
+        create_user 5 "Person 5",
+        create_user 6 "Person 6",
+        create_user 7 "Person 7",
+        create_user 8 "Person 8",
+        create_user 9 "Person 9",
+        create_user 10 "Person 10"
+    ]
+
+test_message_list :: [Message]
+test_message_list = [
+        create_message 1 "AAAAAAA" "Test Time" (create_user 1 "Person 1") (create_user 2 "Person 1") , 
+        create_message 2 "AAAAAAA" "Test Time" (create_user 1 "Person 1") (create_user 2 "Person 1")
+    ]
+
+main :: IO ()
+main = do
+    message_list <- (parMap rdeepseq) user_thread user_list
+    print "Test"
+
+user_thread :: User -> [[IO Message]]
+user_thread chosen_user = do
+    single_id <- [user_id chosen_user]
+    let possible_send_users = filter (\a -> a/=chosen_user) user_list
+    
+    let message_ids = [1..10]
+    let messages = (parMap rdeepseq) (message_thread chosen_user possible_send_users) message_ids
+
+    return messages
+
+message_thread :: User -> [User] -> Int -> IO Message
+message_thread from_user potential_send_users _ = do
+    gen <- newStdGen
+    let random_message = take 10 $ randomRs ('a','z') gen
+    let message_made = create_message 1 "random_message" "Test Time" from_user from_user
+    return message_made
+
+    -- made_message = 
+
+
+-- test_function :: User -> [Int]
+-- test_function user_parsed = [user_id user_parsed] 
+
+-- See if removing values from list in haskell is possible.
+-- ReplicateM threads need to work for messages in bulk of 10
+-- ID could be generated using UUID or by concatenating userId of sender to incremental message ID
+-- Need to work on delay param.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module Main (main) where
+
+import Control.Concurrent
+
+import Users
+import Messages
+import System.IO
+import System.Random
+
+main :: IO ()
+main = do
+    forkIO user_thread (create_user 1 "Person 1")
+    return ()
+
+get_greeting :: User -> IO String
+get_greeting user = do
+    tid <- myThreadId
+    name <- username user
+    let greeting = "Hello to " ++ name
+    
+    return $! greeting
+
+user_thread :: IO ()
+user_thread chosen_user = do
+    greeting <- get_greeting chosen_user
+    putStrLn greeting
+
+
+create_user :: Int -> String -> User
+create_user id_parse username_parse = User {user_id = id_parse, username = username_parse}

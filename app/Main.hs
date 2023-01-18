@@ -114,23 +114,24 @@ main = do
     mapM_ make_message_list messages
 
     -- putStrLn (show num_messages)
-    -- mapM_ (count_messages_for_user messages) full_user_list
+
+    mapM_ (count_messages_for_user messages) full_user_list
     return ()
 
 make_message_list :: Message -> IO ()
 make_message_list message_test = do
     putStrLn (show message_test)
 
--- count_messages_for_user :: [Message] -> User -> IO ()
--- count_messages_for_user message_list filter_user = do
---     let user_messages_revieved = filter (\lambda_message -> (user_sent_to lambda_message) == filter_user) message_list
---     let num_messages = length message_list
+count_messages_for_user :: [Message] -> User -> IO ()
+count_messages_for_user message_list filter_user = do
+    let user_messages_revieved = filter (\lambda_message -> (user_sent_to lambda_message) == filter_user) message_list
+    let num_messages = length message_list
     
---     -- putStrLn (show num_messages)
+    -- putStrLn (show num_messages)
 
---     -- putStrLn (show num_messages)
+    -- putStrLn (show num_messages)
 
---     putStrLn ((username filter_user) ++ " Recieved " ++ (show num_messages) ++ "Messages")
+    putStrLn ((username filter_user) ++ " Recieved " ++ (show num_messages) ++ "Messages")
 
 full_user_list :: [User]
 full_user_list = [

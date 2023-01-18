@@ -106,32 +106,25 @@ main = do
     mapM_ (\_ -> readChan messages_duped_chan) [1..100]
     putStrLn "All Messages Sent!"
 
-    messages <- getChanContents messages_chan
+    infinite_messages <- getChanContents messages_chan
+    let messages = take 100 $ infinite_messages
     let num_messages = length messages
-    print (dynTypeRep (toDyn messages))
-    print (dynTypeRep (toDyn num_messages))
 
-    mapM_ make_message_list messages
-
-    -- putStrLn (show num_messages)
+    -- mapM_ make_message_list messages
 
     mapM_ (count_messages_for_user messages) full_user_list
+    
     return ()
 
-make_message_list :: Message -> IO ()
-make_message_list message_test = do
+print_messages :: Message -> IO ()
+print_messages message_test = do
     putStrLn (show message_test)
 
 count_messages_for_user :: [Message] -> User -> IO ()
 count_messages_for_user message_list filter_user = do
     let user_messages_revieved = filter (\lambda_message -> (user_sent_to lambda_message) == filter_user) message_list
-    let num_messages = length message_list
-    
-    -- putStrLn (show num_messages)
-
-    -- putStrLn (show num_messages)
-
-    putStrLn ((username filter_user) ++ " Recieved " ++ (show num_messages) ++ "Messages")
+    let num_messages = length user_messages_revieved
+    putStrLn ((username filter_user) ++ " Recieved " ++ (show num_messages) ++ " Messages")
 
 full_user_list :: [User]
 full_user_list = [

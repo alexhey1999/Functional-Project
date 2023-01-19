@@ -34,8 +34,11 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
+    , parallel
     , random
     , time
+    , unix-time
+    , uuid
   default-language: Haskell2010
 
 executable Message-Program-exe
@@ -48,8 +51,11 @@ executable Message-Program-exe
   build-depends:
       Message-Program
     , base >=4.7 && <5
+    , parallel
     , random
     , time
+    , unix-time
+    , uuid
   default-language: Haskell2010
 
 test-suite Message-Program-test
@@ -63,6 +69,9 @@ test-suite Message-Program-test
   build-depends:
       Message-Program
     , base >=4.7 && <5
+    , parallel
     , random
     , time
+    , unix-time
+    , uuid
   default-language: Haskell2010

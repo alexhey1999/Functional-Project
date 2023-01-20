@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE DeriveGeneric #-}</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Messages</span><span>
+</span><span id="line-4"></span><span>    </span><span class="hs-special">(</span><span> </span><span>
+</span><span id="line-5"></span><span>        </span><span class="annot"><a href="Messages.html#Message"><span class="hs-identifier">Message</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-6"></span><span>        </span><span class="annot"><a href="Messages.html#test_message_class"><span class="hs-identifier">test_message_class</span></a></span><span>
+</span><span id="line-7"></span><span>    </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.UUID</span></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Users.html"><span class="hs-identifier">Users</span></a></span><span>
+</span><span id="line-12"></span><span>
+</span><span id="line-13"></span><span class="hs-comment">-- | Message datatype</span><span>
+</span><span id="line-14"></span><span id="local-6989586621679049985"><span id="local-6989586621679049986"></span></span><span class="hs-keyword">data</span><span> </span><span id="Message"><span class="annot"><a href="Messages.html#Message"><span class="hs-identifier hs-var">Message</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Message"><span class="annot"><a href="Messages.html#Message"><span class="hs-identifier hs-var">Message</span></a></span></span><span> </span><span class="hs-special">{</span><span>
+</span><span id="line-15"></span><span>    </span><span id="message_id"><span class="annot"><span class="annottext">Message -&gt; UUID
+</span><a href="Messages.html#message_id"><span class="hs-identifier hs-var hs-var">message_id</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">UUID</span></span><span class="hs-special">,</span><span>
+</span><span id="line-16"></span><span>    </span><span id="message_content"><span class="annot"><span class="annottext">Message -&gt; String
+</span><a href="Messages.html#message_content"><span class="hs-identifier hs-var hs-var">message_content</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">,</span><span>
+</span><span id="line-17"></span><span>    </span><span id="time_created"><span class="annot"><span class="annottext">Message -&gt; Int
+</span><a href="Messages.html#time_created"><span class="hs-identifier hs-var hs-var">time_created</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">,</span><span>
+</span><span id="line-18"></span><span>    </span><span id="user_sent_to"><span class="annot"><span class="annottext">Message -&gt; User
+</span><a href="Messages.html#user_sent_to"><span class="hs-identifier hs-var hs-var">user_sent_to</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Users.html#User"><span class="hs-identifier hs-type">User</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-19"></span><span>    </span><span id="user_sent_from"><span class="annot"><span class="annottext">Message -&gt; User
+</span><a href="Messages.html#user_sent_from"><span class="hs-identifier hs-var hs-var">user_sent_from</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Users.html#User"><span class="hs-identifier hs-type">User</span></a></span><span>
+</span><span id="line-20"></span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679049961"><span id="local-6989586621679049963"><span id="local-6989586621679049977"><span class="annot"><span class="annottext">Int -&gt; Message -&gt; ShowS
+[Message] -&gt; ShowS
+Message -&gt; String
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+showList :: [Message] -&gt; ShowS
+$cshowList :: [Message] -&gt; ShowS
+show :: Message -&gt; String
+$cshow :: Message -&gt; String
+showsPrec :: Int -&gt; Message -&gt; ShowS
+$cshowsPrec :: Int -&gt; Message -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">forall x. Rep Message x -&gt; Message
+forall x. Message -&gt; Rep Message x
+forall a.
+(forall x. a -&gt; Rep a x) -&gt; (forall x. Rep a x -&gt; a) -&gt; Generic a
+$cto :: forall x. Rep Message x -&gt; Message
+$cfrom :: forall x. Message -&gt; Rep Message x
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">)</span><span>
+</span><span id="line-21"></span><span>
+</span><span id="line-22"></span><span class="hs-comment">-- | Function used to test imports of message class</span><span>
+</span><span id="line-23"></span><span class="annot"><a href="Messages.html#test_message_class"><span class="hs-identifier hs-type">test_message_class</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-24"></span><span id="test_message_class"><span class="annot"><span class="annottext">test_message_class :: IO ()
+</span><a href="Messages.html#test_message_class"><span class="hs-identifier hs-var hs-var">test_message_class</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO ()
+</span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Message Class&quot;</span></span></pre></body></html>

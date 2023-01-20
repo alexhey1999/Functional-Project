@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Messages
+      Processes
       Users
   other-modules:
       Paths_Message_Program
